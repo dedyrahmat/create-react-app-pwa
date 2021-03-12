@@ -1,23 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
+  const [source, setSource] = useState("");
+
+  const handleCapture = (target) => {
+    if (target.files) {
+      if (target.files.length !== 0) {
+        const file = target.files[0];
+        const newUrl = URL.createObjectURL(file);
+        setSource(newUrl);
+      }
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {source && <img src={source} alt="logo" />}
+        <input
+          accept="image/*"
+          id="icon-button-file"
+          type="file"
+          capture="environment"
+          onChange={(e) => handleCapture(e.target)}
+        />
+        <label htmlFor="icon-button-file">Upload</label>
       </header>
     </div>
   );
