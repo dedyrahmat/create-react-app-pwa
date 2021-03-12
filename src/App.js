@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {source && <img src={source} alt="logo" />}
+        {source && <img src={source} style={{ width: "100%" }} alt="logo" />}
         <input
           accept="image/*"
           id="icon-button-file"
